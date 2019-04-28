@@ -1,10 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useActions } from "react-redux";
 import Counter from "../components/Counter";
+import { increment, decrement } from "../modules/counter";
 
 const CounterContainer = () => {
   const counter = useSelector(state => state.counter, []);
-  return <Counter />;
+  const [onIncrease, onDecrease] = useActions([increment, decrement], []);
+  return (
+    <Counter number={counter} onIncrease={onIncrease} onDecrease={onDecrease} />
+  );
 };
 
 export default CounterContainer;
